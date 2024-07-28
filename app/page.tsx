@@ -27,15 +27,17 @@ export default function Home() {
       {/* Main content */}
 
       <main className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-  <div className="md:w-1/2 mb-8    md:mb-0">
-    <h1 className="text-5xl md:text-[4rem]  font-semibold text-purple-950 font-bold text-navy mb-4">
+  <div className="md:w-1/2 max-md:pt-[17rem] mb-8  md:mb-0">
+    <h1 className="text-5xl md:text-[4rem] max-md:hidden  font-semibold text-purple-950 font-bold text-navy mb-4">
       Together, Let's 
-      <span className="block text-[#A4167A] font-bold">Reimagine Ghana!</span>
     </h1>
-    <p className="mb-6 max-md:text-white">Become a part of our team, sign up for updates.</p>
+      <h1 className="block text-[#A4167A] text-5xl pb-4 font-bold">Reimagine Ghana!</h1>
+    {/* <p className="mb-6 max-md:text-white">Become a part of our team, sign up for updates.</p> */}
+      <Link href={`/register`}>
     <form className="flex flex-col sm:flex-row gap-4">
       <button type="submit"  style={{ boxShadow: '0px 12px 25px 0px rgba(13, 47, 93, 0.43)' }} className="px-6 py-2 bg-navy text-white rounded  w-1/2 sm:w-1/3 bg-[#A4167A] hover:bg-[#FFCC00] transition">REGISTER</button>
     </form>
+      </Link>
   </div>
   {/* <div className="md:w-1/2">
     <Image src={image1} alt="Linda Russell" className="w-full rounded-lg shadow-lg" />

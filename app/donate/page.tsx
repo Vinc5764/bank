@@ -1,12 +1,13 @@
 import React from 'react'
 import DonationForm from '../components/DonationForm'
-import Header from '../components/Header'
+
 import Footer from '../components/Footer'
+import Header1 from '../components/Header1'
 
 const page = () => {
   return (
     <div>
-        <Header/>
+        <Header1/>
         <DonationForm/>
         <Footer/>
     </div>
