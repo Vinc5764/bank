@@ -7,8 +7,8 @@ const ComponentOne = () => {
   return (
     <div className=' px-14 py-20 md:flex items-center gap-5 space-y-10 bg-white '>
         <div className=" flex flex-col gap-6 max-w-md">
-            <h1 className=' font-semibold text-2xl'>MAIN ISSUES</h1>
-            <h1 className=' font-bold text-4xl'>Dr. John's Priorities</h1>
+            <h1 className=' font-semibold text-2xl'>THE NEW GHANA</h1>
+            <h1 className=' font-bold text-4xl'> 5 Revolutions for Ghana</h1>
             <p>Proin dictum elementum velit. Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer.</p>
             
             <div className="flex  text-xl gap-9">
