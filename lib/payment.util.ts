@@ -16,7 +16,7 @@ export const initializePayment = async (paymentData:any) => {
 
   return response.data;
 };
-export const verifyPayment = async (reference) => {
+export const verifyPayment = async (reference:any) => {
 
     const response = await axios.get(
       `https://api.paystack.co/transaction/verify/${reference}`,
