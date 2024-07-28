@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import image1 from '../../public/pexels-olly-3789105.jpg'
 
-const sections = {
+const sections:any = {
   intro: {
     title: "Linda's Story",
    image:image1,
