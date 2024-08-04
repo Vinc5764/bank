@@ -121,7 +121,7 @@ export default function UserDash() {
   const handlePasswordReset = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${baseURL}/reset-password`, {
+      const response = await axios.post(`${baseURL}/reset-pass`, {
         userId: datas._id,
         newPassword,
       });

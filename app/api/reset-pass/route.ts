@@ -16,6 +16,7 @@ export const POST = async (req: any) => {
     }
 
     user.password = await user.hashPassword(newPassword);
+    user.role = "member";
     await user.save();
     return NextResponse.json(user, { status: 201 });
   } catch (error: any) {
