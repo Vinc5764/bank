@@ -72,9 +72,9 @@ export default function UserDash() {
   const { datas, userType } = useTokenStore();
   const [members, setMembers] = useState<any>([]);
   // const url =
-    // userType === "admin"
-    //   ? "http://localhost:3000/api/register/"
-    //   : `http://localhost:3000/api/register/${datas._id}`;
+  // userType === "admin"
+  //   ? "http://localhost:3000/api/register/"
+  //   : `http://localhost:3000/api/register/${datas._id}`;
 
   const [newMember, setNewMember] = useState<any>({
     name: "",
@@ -86,27 +86,27 @@ export default function UserDash() {
   });
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isloading, setIsLoading] = useState(false);
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/register/${datas._id}", {
-          params: {
-            creator: datas._id,
-          },
-        });
-        // if (!response.ok) {
-        //   throw new Error("Failed to fetch members");
-        // }
-        console.log(response);
+  // useEffect(() => {
+  //   const fetchMembers = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:3000/api/register/${datas._id}", {
+  //         params: {
+  //           creator: datas._id,
+  //         },
+  //       });
+  //       // if (!response.ok) {
+  //       //   throw new Error("Failed to fetch members");
+  //       // }
+  //       console.log(response);
 
-        setMembers(response.data);
-      } catch (error: any) {
-        console.error(error.message);
-      }
-    };
+  //       setMembers(response.data);
+  //     } catch (error: any) {
+  //       console.error(error.message);
+  //     }
+  //   };
 
-    fetchMembers();
-  }, []);
+  //   fetchMembers();
+  // }, []);
 
   const handleInputChange = (e: any) => {
     const { id, value } = e.target;
@@ -120,33 +120,33 @@ export default function UserDash() {
       ...newMember,
       creator: datas._id,
     };
-    try {
-      const response = await fetch(`http://localhost:3000/api/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(memb),
-      });
+    // try {
+    //   const response = await fetch(`http://localhost:3000/api/register`, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(memb),
+    //   });
 
-      if (!response.ok) {
-        throw new Error("Failed to add member");
-      }
-      const result = await response.json();
-      setMembers((prev: any) => [...prev, result]);
-      setNewMember({
-        name: "",
-        email: "",
-        password: "",
-        constituency: "",
-        contactNumber: "",
-      });
-      setIsSuccessModalOpen(true);
-    } catch (error: any) {
-      console.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
+    //   if (!response.ok) {
+    //     throw new Error("Failed to add member");
+    //   }
+    //   const result = await response.json();
+    //   setMembers((prev: any) => [...prev, result]);
+    //   setNewMember({
+    //     name: "",
+    //     email: "",
+    //     password: "",
+    //     constituency: "",
+    //     contactNumber: "",
+    //   });
+    //   setIsSuccessModalOpen(true);
+    // } catch (error: any) {
+    //   console.error(error.message);
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const closeSuccessModal = () => {
