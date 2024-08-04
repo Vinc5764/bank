@@ -8,12 +8,12 @@ export const GET = async (req: any, { params }: any) => {
     // Connect to MongoDB database
     await connectToDB();
 
-    const { mymembers } = params;
+    // const { mymembers } = params;
 
-    // const { searchParams } = new URL(req.url);
-    // const creator = searchParams.get("creator");
+    const { searchParams } = new URL(req.url);
+    const creator = searchParams.get("creator");
     // Retrieve all users from the database
-    const users = await User.find({ mymembers }); // Use appropriate query if needed
+    const users = await User.find({ creator }); // Use appropriate query if needed
 
     // Respond with list of users
     return NextResponse.json(users);
