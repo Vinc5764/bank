@@ -15,8 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import useTokenStore from "@/lib/store";
-// const baseURL = "https://www.johnkpikpi.com/api" // Base URL without trailing slash
-const baseURL = "http://localhost:3000/api"; // Base URL without trailing slash
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
+// const baseURL = "http://localhost:3000/api"; // Base URL without trailing slash
 
 interface LoginFormData {
   email: string;
