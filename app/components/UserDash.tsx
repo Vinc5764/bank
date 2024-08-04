@@ -37,10 +37,10 @@ import axios from "axios";
 export default function UserDash() {
   const { datas, userType } = useTokenStore();
   const [members, setMembers] = useState<any>([]);
-  const url =
-    userType === "admin"
-      ? "http://localhost:3000/api/register/"
-      : `http://localhost:3000/api/register/${datas._id}`;
+  // const url =
+  //   userType === "admin"
+  //     ? "http://localhost:3000/api/register/"
+  //     : `http://localhost:3000/api/register/${datas._id}`;
 
   const [newMember, setNewMember] = useState<any>({
     name: "",
@@ -55,9 +55,7 @@ export default function UserDash() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get(url, {
-          params: { creator: datas._id },
-        });
+        const response = await axios.get("http://localhost:3000/api/register");
         console.log(response.data); // Check structure
         setMembers(response.data);
       } catch (error) {
