@@ -4,13 +4,19 @@ const UserSchema = new Schema(
   {
     name: { type: String, required: false },
     email: { type: String, required: true, unique: true },
+
     creator: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: false,
     },
+
     password: { type: String, required: true },
-    role: { type: String, enum: ["admin", "member"], default: "member" },
+    role: {
+      type: String,
+      enum: ["admin", "member", "newmember"],
+      default: "member",
+    },
     donations: { type: Number, required: false, default: 0 },
     constituency: { type: String, required: false },
     contactNumber: { type: String, required: false },
@@ -18,5 +24,5 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-const User = models.Users || model("Users", UserSchema);
+const User = models.Userrss || model("Userrss", UserSchema);
 export default User;

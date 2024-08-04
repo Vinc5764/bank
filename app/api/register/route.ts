@@ -28,8 +28,9 @@ export const POST = async (req: any) => {
       creator,
       constituency,
       password: hashedPassword,
+      role: creator ? "newmember" : "member",
     });
-
+    const url = "https://www.johnkpikpi.com/sign-in";
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -46,7 +47,7 @@ export const POST = async (req: any) => {
         from: "kanbanc01@gmail.com",
         to: email,
         subject: "Account Created by Creator",
-        text: `Hello ${name},\n\nYour account has been created by ${creatorDetails.name}. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login.\n\nRegards,\nTeam`,
+        text: `Hello ${name},\n\nYour account has been created by ${creatorDetails.name}. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login\n ${url}.\n\nRegards,\nTeam`,
       };
     } else {
       // Email data when creator is not provided

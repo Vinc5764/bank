@@ -24,6 +24,8 @@ export const POST = async (req: NextRequest) => {
       channels: ["card", "mobile_money"], // Include both card and mobile money channels
     });
 
+    const url = "https://www.johnkpikpi.com/sign-in";
+
     // Check if the payment initialization was successful
     if (!paymentResponse.status) {
       return NextResponse.json(

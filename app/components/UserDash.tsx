@@ -35,10 +35,9 @@ import useTokenStore from "@/lib/store";
 import axios from "axios";
 
 export default function UserDash() {
-  const { datas, userType } = useTokenStore();
+  const { datas, userType }:any = useTokenStore();
   const [members, setMembers] = useState<any>([]);
-  const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
-
+  const baseURL = "http://localhost:3000/api";
   const url =
     userType === "admin"
       ? `${baseURL}/register/`
@@ -53,7 +52,12 @@ export default function UserDash() {
     creator: datas._id,
   });
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [isloading, setIsLoading] = useState(false);
+  const [isPasswordResetModalOpen, setIsPasswordResetModalOpen] = useState<any>(
+    userType === "newmember"
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+
   useEffect(() => {
     const fetchMembers = async () => {
       try {
@@ -62,7 +66,7 @@ export default function UserDash() {
             creator: datas._id,
           },
         });
-        console.log(response.data); // Check structure
+        console.log(response.data);
         setMembers(response.data);
       } catch (error) {
         console.error("Error fetching members:", error);
@@ -70,7 +74,7 @@ export default function UserDash() {
     };
 
     fetchMembers();
-  }, [datas._id]); // Add dependencies
+  }, [datas._id, url]);
 
   const handleInputChange = (e: any) => {
     const { id, value } = e.target;
@@ -113,30 +117,44 @@ export default function UserDash() {
     }
   };
 
+  const handlePasswordReset = async (e: any) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${baseURL}/reset-password`, {
+        userId: datas._id,
+        newPassword,
+      });
+
+      if (response.status === 200) {
+        setIsPasswordResetModalOpen(false);
+      }
+    } catch (error) {
+      console.error("Error resetting password:", error);
+    }
+  };
+
   const closeSuccessModal = () => {
     setIsSuccessModalOpen(false);
   };
 
+  const closePasswordResetModal = () => {
+    setIsPasswordResetModalOpen(false);
+  };
+
   return (
     <div className="flex flex-col w-full min-h-screen bg-muted/40">
-      {/* Header section remains unchanged */}
       <header className="flex flex-col items-center gap-[150px] bg-background px-4 py-8 sm:px-6 md:flex-row justify-center md:py-12">
-        <div className="flex flex-col items-center gap-4 ">
+        <div className="flex flex-col items-center gap-4">
           <div
-            className="rounded-full border-2 flex items-center  justify-center  h-[128px] w-[128px]"
+            className="rounded-full border-2 flex items-center justify-center h-[128px] w-[128px]"
             style={{ aspectRatio: "128/128", objectFit: "cover" }}
-          >
-            {/* <p className=" text-5xl text-purple-950">{datas.name[0]}</p> */}
-          </div>
+          ></div>
           <div className="grid gap-1 text-center">
             <div className="text-2xl text-[#A4167A] font-bold">
               {datas.name}
             </div>
             <div className="text-sm text-muted-foreground">
               {datas.constituency}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {/* Donations: {datas.donations} */}
             </div>
           </div>
         </div>
@@ -147,10 +165,9 @@ export default function UserDash() {
             </Button>
           </Link>
           <Link href="/dashboard/donate">
-            {" "}
             <Button
               size="lg"
-              className="bg-white text-black hover:bg-white border-black border-2 "
+              className="bg-white text-black hover:bg-white border-black border-2"
             >
               Contribute
             </Button>
@@ -162,7 +179,6 @@ export default function UserDash() {
         <div className="max-w-4xl mx-auto grid gap-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold">Members</h2>
-            {/* Add Member button and dialog */}
             <Dialog>
               <DialogTrigger asChild>
                 <Button size="sm" className="bg-purple-950 hover:bg-purple-950">
@@ -226,7 +242,7 @@ export default function UserDash() {
                     />
                   </div>
                   <Button type="submit" className="w-full bg-[#A4167A]">
-                    {isloading ? <Spinner /> : "Create Account"}
+                    {isLoading ? <Spinner /> : "Create Account"}
                   </Button>
                 </form>
               </DialogContent>
@@ -253,56 +269,30 @@ export default function UserDash() {
               <TableBody>
                 {members.map((member: any) => (
                   <TableRow key={member._id}>
-                    <TableCell>
-                      <div className="flex items-center gap-4">
-                        <Avatar className="w-12 h-12">
-                          <AvatarFallback>
-                            {/* {member.name ? member.name[0] : "U"} */}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="grid gap-1">
-                          <div className="font-medium">
-                            {member.name || "Unknown"}
-                          </div>
-                        </div>
-                      </div>
+                    <TableCell className="font-medium">{member.name}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {member.constituency}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {member.constituency || "N/A"}
+                      ${member.donations}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {member.donations}
+                      {member.email}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      <div className="flex items-center gap-2">
-                        <MailIcon className="w-4 h-4 text-muted-foreground" />
-                        <div className="text-sm text-muted-foreground">
-                          {member.email || "N/A"}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      <div className="flex items-center gap-2">
-                        <PhoneIcon className="w-4 h-4 text-muted-foreground" />
-                        <div className="text-sm text-muted-foreground">
-                          {member.contactNumber || "N/A"}
-                        </div>
-                      </div>
+                      {member.contactNumber}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="ml-auto bg-[#A4167A] hover:bg-purple-950"
-                          >
-                            <MoveHorizontalIcon className="" />
+                          <Button variant="ghost" className="w-8 h-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            {/* <MoreVerticalIcon className="w-4 h-4" /> */}
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem>View Profile</DropdownMenuItem>
-                          <DropdownMenuItem>Remove Member</DropdownMenuItem>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Delete</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
@@ -314,20 +304,52 @@ export default function UserDash() {
         </div>
       </main>
 
-      {/* Success Modal */}
-      <Dialog open={isSuccessModalOpen} onOpenChange={closeSuccessModal}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Success</DialogTitle>
-            <DialogDescription>
-              The new member has been added successfully.
-            </DialogDescription>
+      {isSuccessModalOpen && (
+        <Dialog open={isSuccessModalOpen} onOpenChange={setIsSuccessModalOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Success</DialogTitle>
+              <DialogDescription>
+                New member added successfully!
+              </DialogDescription>
+            </DialogHeader>
             <DialogFooter>
               <Button onClick={closeSuccessModal}>Close</Button>
             </DialogFooter>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {isPasswordResetModalOpen && (
+        <Dialog
+          open={isPasswordResetModalOpen}
+          onOpenChange={setIsPasswordResetModalOpen}
+        >
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Reset Password</DialogTitle>
+              <DialogDescription>
+                Please reset your password to continue.
+              </DialogDescription>
+            </DialogHeader>
+            <form onSubmit={handlePasswordReset} className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="newPassword">New Password</Label>
+                <Input
+                  id="newPassword"
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Enter your new password"
+                />
+              </div>
+              <Button type="submit" className="w-full bg-[#A4167A]">
+                Reset Password
+              </Button>
+            </form>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }
