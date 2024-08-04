@@ -15,13 +15,13 @@ const Header = () => {
               <span className="text-sm text-[#A4167A]">For President</span>
             </div>
           </Link>
-          <nav className="hidden md:flex space-x-4">
+          <nav className=" md:flex space-x-4">
             <Link href="/donate">
               <button
                 style={{
                   boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)",
                 }}
-                className="px-4 py-2 bg-[#A4167A] text-white w-[120px] font-bold rounded hover:bg-[#FFCC00] shadow-md transition"
+                className=" hidden md:block px-4 py-2 bg-[#A4167A] text-white w-[120px] font-bold rounded hover:bg-[#FFCC00] shadow-md transition"
               >
                 DONATE
               </button>
