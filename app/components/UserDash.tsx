@@ -40,7 +40,7 @@ export default function UserDash() {
   const url =
     userType === "admin"
       ? "http://localhost:3000/api/register/"
-      : `http://localhost:3000/api/register/`;
+      : `http://localhost:3000/api/register/${datas._id}`;
 
   const [newMember, setNewMember] = useState<any>({
     name: "",
