@@ -64,7 +64,7 @@ export default function UserDash() {
     };
 
     fetchMembers();
-  }, [url, datas._id]); // Add dependencies
+  }, [datas._id]); // Add dependencies
 
   const handleInputChange = (e: any) => {
     const { id, value } = e.target;
