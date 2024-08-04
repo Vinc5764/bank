@@ -22,6 +22,7 @@ interface RegisterFormData {
   constituency: string;
   password: string;
 }
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
 
 export default function Register() {
   const {
@@ -47,10 +48,7 @@ export default function Register() {
         // Merge publicMetadata with form data
       };
       console.log("Form Data:", mergedData); // Log the form data
-      const response = await axios.post(
-        "https://www.johnkpikpi.com/api/register",
-        mergedData
-      );
+      const response = await axios.post(`${baseURL}/register`, mergedData);
 
       setLoading(false);
 
