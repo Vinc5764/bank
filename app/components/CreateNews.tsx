@@ -11,7 +11,7 @@ import { uploadFile } from "@/lib/upload";
 
 const createNews:any = async (newsData:any) => {
   try {
-    const response = await fetch("http://localhost:3000/api/news", {
+    const response = await fetch(`${process.env.URL}/api/news` || "http://localhost:3000/api/news", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

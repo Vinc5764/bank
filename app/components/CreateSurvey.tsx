@@ -12,7 +12,7 @@ import Spinner from "./Spinner";
 // Function to handle survey creation
 const createSurvey = async (surveyData:any) => {
   try {
-    const response = await fetch("http://localhost:3000/api/survey", {
+    const response = await fetch(`${process.env.URL}/api/survey` || "http://localhost:3000/api/survey", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
