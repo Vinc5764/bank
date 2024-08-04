@@ -71,10 +71,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function UserDash() {
   const { datas, userType } = useTokenStore();
   const [members, setMembers] = useState<any>([]);
-  const url =
-    userType === "admin"
-      ? "http://localhost:3000/api/register/"
-      : `http://localhost:3000/api/register/${datas._id}`;
+  // const url =
+    // userType === "admin"
+    //   ? "http://localhost:3000/api/register/"
+    //   : `http://localhost:3000/api/register/${datas._id}`;
 
   const [newMember, setNewMember] = useState<any>({
     name: "",
@@ -89,7 +89,7 @@ export default function UserDash() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get(url, {
+        const response = await axios.get("http://localhost:3000/api/register/${datas._id}", {
           params: {
             creator: datas._id,
           },
