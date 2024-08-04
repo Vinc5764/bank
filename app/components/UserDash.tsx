@@ -35,9 +35,10 @@ import useTokenStore from "@/lib/store";
 import axios from "axios";
 
 export default function UserDash() {
-  const { datas, userType }:any = useTokenStore();
+  const { datas, userType }: any = useTokenStore();
   const [members, setMembers] = useState<any>([]);
-  const baseURL = "http://localhost:3000/api";
+  // const baseURL = "http://localhost:3000/api";
+  const baseURL = "https://www.johnkpikpi.com/api";
   const url =
     userType === "admin"
       ? `${baseURL}/register/`

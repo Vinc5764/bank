@@ -22,8 +22,8 @@ interface RegisterFormData {
   constituency: string;
   password: string;
 }
-// const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
-const baseURL = "http://localhost:3000/api";
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
+// const baseURL = "http://localhost:3000/api";
 export default function Register() {
   const {
     register,
