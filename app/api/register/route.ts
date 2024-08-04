@@ -12,14 +12,13 @@ export const POST = async (req: any) => {
 
     console.log(email, contactNumber, name, creator);
 
-    const creatorDetails: any = User.findById(creator);
-
     // Connect to MongoDB database
     await connectToDB();
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const creatorDetails: any = User.findById(creator);
     // Create a new user instance
     const newUser = new User({
       email,
