@@ -54,7 +54,7 @@ export default function Register() {
 
       if (response.status === 200) {
         // openModal();
-        router.push("/verify");
+        router.push("/sign-in");
       } else {
         alert("Failed to process registration");
       }

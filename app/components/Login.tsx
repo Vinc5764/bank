@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import useTokenStore from "@/lib/store";
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
 
 interface LoginFormData {
   email: string;
@@ -44,10 +45,7 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        "http://localhost:3000/api/sign-in",
-        mergedData
-      );
+      const response = await axios.post(`${baseURL}/sign-in`, mergedData);
       setToken(
         response.data.token,
         response.data.user.role,

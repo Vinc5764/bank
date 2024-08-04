@@ -37,10 +37,12 @@ import axios from "axios";
 export default function UserDash() {
   const { datas, userType } = useTokenStore();
   const [members, setMembers] = useState<any>([]);
+  const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
+
   const url =
     userType === "admin"
-      ? "http://localhost:3000/api/register/"
-      : `http://localhost:3000/api/register/mymembers`;
+      ? `${baseURL}/register/`
+      : `${baseURL}/register/mymembers`;
 
   const [newMember, setNewMember] = useState<any>({
     name: "",
@@ -83,7 +85,7 @@ export default function UserDash() {
       creator: datas._id,
     };
     try {
-      const response = await fetch(`http://localhost:3000/api/register`, {
+      const response = await fetch(`${baseURL}/register/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
