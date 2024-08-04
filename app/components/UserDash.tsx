@@ -87,16 +87,13 @@ export default function UserDash() {
       creator: datas._id,
     };
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/register${datas._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(memb),
-        }
-      );
+      const response = await fetch(`http://localhost:3000/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(memb),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to add member");
