@@ -56,23 +56,17 @@ export default function UserDash() {
     const fetchMembers = async () => {
       try {
         const response = await axios.get(url, {
-          params: {
-            creator: datas._id,
-          },
+          params: { creator: datas._id },
         });
-        // if (!response.ok) {
-        //   throw new Error("Failed to fetch members");
-        // }
-        console.log(response);
-
+        console.log(response.data); // Check structure
         setMembers(response.data);
-      } catch (error: any) {
-        console.error(error.message);
+      } catch (error) {
+        console.error("Error fetching members:", error);
       }
     };
 
     fetchMembers();
-  }, []);
+  }, [url, datas._id]); // Add dependencies
 
   const handleInputChange = (e: any) => {
     const { id, value } = e.target;
