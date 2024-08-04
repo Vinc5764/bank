@@ -34,6 +34,40 @@ import Spinner from "./Spinner";
 import useTokenStore from "@/lib/store";
 import axios from "axios";
 
+import { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { datas, userType } = useTokenStore.getState();
+  const url =
+    userType === "admin"
+      ? "http://localhost:3000/api/register/"
+      : `http://localhost:3000/api/register/${datas._id}`;
+
+  try {
+    const response = await axios.get(url, {
+      params: {
+        creator: datas._id,
+      },
+    });
+    return {
+      props: {
+        initialMembers: response.data,
+        datas,
+        userType,
+      },
+    };
+  } catch (error: any) {
+    console.error(error.message);
+    return {
+      props: {
+        initialMembers: [],
+        datas,
+        userType,
+      },
+    };
+  }
+};
+
 export default function UserDash() {
   const { datas, userType } = useTokenStore();
   const [members, setMembers] = useState<any>([]);
