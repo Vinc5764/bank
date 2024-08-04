@@ -3,15 +3,17 @@ import User from "@/app/api/model/user.model";
 import { NextResponse } from "next/server";
 // import bcrypt from "bcryptjs";
 
-export const GET = async (req: any) => {
+export const GET = async (req: any, { params }: any) => {
   try {
     // Connect to MongoDB database
     await connectToDB();
 
-    const { searchParams } = new URL(req.url);
-    const creator = searchParams.get("creator");
+    const { mymembers } = params;
+
+    // const { searchParams } = new URL(req.url);
+    // const creator = searchParams.get("creator");
     // Retrieve all users from the database
-    const users = await User.find({ creator }); // Use appropriate query if needed
+    const users = await User.find({ mymembers }); // Use appropriate query if needed
 
     // Respond with list of users
     return NextResponse.json(users);
