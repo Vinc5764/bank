@@ -30,15 +30,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import Spinner from "./Spinner";
 import useTokenStore from "@/lib/store";
 import axios from "axios";
+import Spinner from "./Spinner";
 
 export default function UserDash() {
   const { datas, userType }: any = useTokenStore();
   const [members, setMembers] = useState<any>([]);
-  // const baseURL = "http://localhost:3000/api";
-  const baseURL = "https://www.johnkpikpi.com/api";
+  const baseURL = "http://localhost:3000/api";
   const url =
     userType === "admin"
       ? `${baseURL}/register/`
@@ -58,6 +57,7 @@ export default function UserDash() {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [newPassword, setNewPassword] = useState("");
+  const [selectedMember, setSelectedMember] = useState<any>(null);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -126,7 +126,8 @@ export default function UserDash() {
         newPassword,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
+        alert("Password reset successfully");
         setIsPasswordResetModalOpen(false);
       }
     } catch (error) {
@@ -140,6 +141,14 @@ export default function UserDash() {
 
   const closePasswordResetModal = () => {
     setIsPasswordResetModalOpen(false);
+  };
+
+  const openProfileModal = (member: any) => {
+    setSelectedMember(member);
+  };
+
+  const closeProfileModal = () => {
+    setSelectedMember(null);
   };
 
   return (
@@ -268,14 +277,14 @@ export default function UserDash() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {members.map((member: any) => (
-                  <TableRow key={member._id}>
+                {members.map((member: any, index: number) => (
+                  <TableRow key={index}>
                     <TableCell className="font-medium">{member.name}</TableCell>
                     <TableCell className="hidden md:table-cell">
                       {member.constituency}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      ${member.donations}
+                      {member.contributions || 0}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
                       {member.email}
@@ -283,19 +292,14 @@ export default function UserDash() {
                     <TableCell className="hidden md:table-cell">
                       {member.contactNumber}
                     </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="w-8 h-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            {/* <MoreVerticalIcon className="w-4 h-4" /> */}
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
-                          <DropdownMenuItem>Delete</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                    <TableCell className="flex justify-between space-x-2">
+                      <Button
+                        size="sm"
+                        className="bg-[#A4167A] text-white hover:bg-[#A4167A]"
+                        onClick={() => openProfileModal(member)}
+                      >
+                        View Profile
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -305,52 +309,92 @@ export default function UserDash() {
         </div>
       </main>
 
-      {isSuccessModalOpen && (
-        <Dialog open={isSuccessModalOpen} onOpenChange={setIsSuccessModalOpen}>
+      {selectedMember && (
+        <Dialog open={true} onOpenChange={closeProfileModal}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Success</DialogTitle>
+              <DialogTitle>Member Profile</DialogTitle>
               <DialogDescription>
-                New member added successfully!
+                Details of the selected member.
               </DialogDescription>
             </DialogHeader>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" value={selectedMember.name} readOnly />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" value={selectedMember.email} readOnly />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="constituency">Constituency</Label>
+                <Input
+                  id="constituency"
+                  value={selectedMember.constituency}
+                  readOnly
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contactNumber">Contact Number</Label>
+                <Input
+                  id="contactNumber"
+                  value={selectedMember.contactNumber}
+                  readOnly
+                />
+              </div>
+            </div>
             <DialogFooter>
-              <Button onClick={closeSuccessModal}>Close</Button>
+              <Button onClick={closeProfileModal} className="mt-4">
+                Close
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       )}
 
-      {isPasswordResetModalOpen && (
-        <Dialog
-          open={isPasswordResetModalOpen}
-          onOpenChange={setIsPasswordResetModalOpen}
-        >
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Reset Password</DialogTitle>
-              <DialogDescription>
-                Please reset your password to continue.
-              </DialogDescription>
-            </DialogHeader>
-            <form onSubmit={handlePasswordReset} className="grid gap-4 py-4">
-              <div className="grid gap-2">
-                <Label htmlFor="newPassword">New Password</Label>
-                <Input
-                  id="newPassword"
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Enter your new password"
-                />
-              </div>
-              <Button type="submit" className="w-full bg-[#A4167A]">
-                Reset Password
-              </Button>
-            </form>
-          </DialogContent>
-        </Dialog>
-      )}
+      <Dialog open={isSuccessModalOpen} onOpenChange={setIsSuccessModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Success</DialogTitle>
+            <DialogDescription>
+              The member has been successfully added.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={closeSuccessModal} className="mt-4">
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={isPasswordResetModalOpen}
+        onOpenChange={setIsPasswordResetModalOpen}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Password Reset</DialogTitle>
+            <DialogDescription>Please reset your password.</DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handlePasswordReset} className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="newPassword">New Password</Label>
+              <Input
+                id="newPassword"
+                type="password"
+                value={newPassword}
+                onChange={(e: any) => setNewPassword(e.target.value)}
+                required
+              />
+            </div>
+            <Button type="submit" className="mt-4">
+              Reset Password
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

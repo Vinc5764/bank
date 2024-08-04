@@ -4,7 +4,7 @@ import { connectToDB } from "@/lib/connect";
 import { NextResponse } from "next/server";
 import News from "../model/news.model";
 import User from "../model/user.model";
-
+import bcrypt from "bcryptjs";
 // Handler to create a new news article
 export const POST = async (req: any) => {
   try {
@@ -14,8 +14,8 @@ export const POST = async (req: any) => {
     if (!user) {
       return NextResponse.json({ message: "User not found" });
     }
-
-    user.password = await user.hashPassword(newPassword);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
     user.role = "member";
     await user.save();
     return NextResponse.json(user, { status: 201 });
