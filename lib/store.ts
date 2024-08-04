@@ -53,7 +53,7 @@ const useTokenStore = create<TokenState>()(
     }),
     {
       name: "token-storage", // name of the item in localStorage
-      // getStorage: () => localStorage, // use localStorage
+      getStorage: () => localStorage, // use localStorage
     }
   )
 );
