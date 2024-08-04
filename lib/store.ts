@@ -1,16 +1,61 @@
-import { create } from 'zustand';
+// import { create } from "zustand";
+// interface TokenState {
+//   token: string | null;
+//   userType: any;
+//   name: any;
+//   setToken: (token: string, userType: any, name: any) => void;
+//   clearToken: () => void;
+// }
 
-const useStore:any = create((set:any) => ({
-  name: '',
-  setName: (newName:any) => set({ name: newName }),
-  
-  vehicle: [],
-  setVehicle: (newVehicles:any) => set({ vehicle: newVehicles }),
-  addVehicle: (newVehicle:any) => set((state:any) => ({ vehicles: [...state.vehicles, newVehicle] })),
+// const useTokenStore = create<TokenState>((set) => ({
+//   token: localStorage.getItem("token") || null,
+//   name: localStorage.getItem("name") || null,
+//   userType: localStorage.getItem("userType") || null,
+//   setToken: (token: string, userType: any, name: any) => {
+//     localStorage.setItem("token", token);
+//     localStorage.setItem("userType", userType);
+//     localStorage.setItem("name", name);
+//     set({ token, userType, name });
+//   },
+//   clearToken: () => {
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("userType");
+//     set({ token: null, userType: null });
+//   },
+// }));
 
-  userDetails: [],
-  setUser: (newVehicles:any) => set({ userDetails: newVehicles }),
-  
-}));
+// export default useTokenStore;
 
-export default useStore;
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+type UserType = "admin" | "customer" | null;
+
+interface TokenState {
+  token: string | null;
+  userType: UserType;
+  name: any;
+  datas: any;
+  setToken: (token: string, userType: UserType, name: any, datas: any) => void;
+  clearToken: () => void;
+}
+
+const useTokenStore = create<TokenState>()(
+  persist(
+    (set) => ({
+      token: null,
+      userType: null,
+      name: null,
+      datas: [],
+      setToken: (token: string, userType: UserType, name: any, datas: any) =>
+        set({ token, userType, name, datas }),
+      clearToken: () => set({ token: null }),
+    }),
+    {
+      name: "token-storage", // name of the item in localStorage
+      getStorage: () => localStorage, // use localStorage
+    }
+  )
+);
+
+export default useTokenStore;

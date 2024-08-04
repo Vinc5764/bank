@@ -14,56 +14,59 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import useTokenStore from "@/lib/store";
 
-interface RegisterFormData {
-  name: string;
+interface LoginFormData {
   email: string;
-  contactNumber: string;
-  constituency: string;
   password: string;
 }
 
-export default function Register() {
+export default function Login() {
   const {
     register,
-    handleSubmit,
     watch,
+    handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormData>();
+  } = useForm<LoginFormData>();
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
-
+  const { setToken } = useTokenStore();
   const router = useRouter();
   const formData = watch();
-
-  const onSubmit = async (data: RegisterFormData) => {
+  const mergedData = {
+    ...formData,
+    // Merge publicMetadata with form data
+  };
+  const onSubmit = async (data: LoginFormData) => {
     try {
       setLoading(true);
-      const mergedData = {
-        ...formData,
-        // Merge publicMetadata with form data
-      };
-      console.log("Form Data:", mergedData); // Log the form data
+
       const response = await axios.post(
-        "http://localhost:3000/api/register",
+        "http://localhost:3000/api/sign-in",
         mergedData
       );
-
+      setToken(
+        response.data.token,
+        response.data.user.role,
+        response.data.user.name,
+        response.data.user
+      );
       setLoading(false);
 
       if (response.status === 200) {
-        // openModal();
-        router.push("/verify");
+        // Handle successful login, e.g., store token, redirect, etc.
+        openModal();
+        router.push("/dashboard"); // Redirect to dashboard or desired page
       } else {
-        alert("Failed to process registration");
+        alert("Failed to login");
       }
     } catch (error) {
       setLoading(false);
-      console.error("Error processing registration:", error);
-      alert("An error occurred while processing the registration");
+      console.error("Error logging in:", error);
+      alert("An error occurred while logging in");
     }
   };
 
@@ -72,9 +75,11 @@ export default function Register() {
       <Card className="max-w-2xl mx-auto p-6 sm:p-8 md:p-10">
         <CardHeader>
           <CardTitle className="text-3xl text-blue-950 font-bold">
-            Register to Get Informed
+            Login
           </CardTitle>
-          <CardDescription>Provide your details and register.</CardDescription>
+          <CardDescription>
+            Enter your email and password to login.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -82,21 +87,6 @@ export default function Register() {
             className="grid grid-cols-1 md:grid-cols-1 gap-6"
           >
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  {...register("name", { required: "Name is required" })}
-                  placeholder="Your Name"
-                />
-                {errors.name && (
-                  <p className="text-red-500">
-                    {errors.name.message as string}
-                  </p>
-                )}
-              </div>
-
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -108,40 +98,6 @@ export default function Register() {
                 {errors.email && (
                   <p className="text-red-500">
                     {errors.email.message as string}
-                  </p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="contactNumber">Contact Number</Label>
-                <Input
-                  id="contactNumber"
-                  type="tel"
-                  {...register("contactNumber", {
-                    required: "Contact number is required",
-                  })}
-                  placeholder="+1 (123) 456-7890"
-                />
-                {errors.contactNumber && (
-                  <p className="text-red-500">
-                    {errors.contactNumber.message as string}
-                  </p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="constituency">Constituency</Label>
-                <Input
-                  id="constituency"
-                  type="text"
-                  {...register("constituency", {
-                    required: "Constituency is required",
-                  })}
-                  placeholder="Your Constituency"
-                />
-                {errors.constituency && (
-                  <p className="text-red-500">
-                    {errors.constituency.message as string}
                   </p>
                 )}
               </div>
@@ -179,12 +135,8 @@ export default function Register() {
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">
-              Registration Successful!
-            </h2>
-            <p className="mb-4">
-              Thank you for registering. You will receive updates soon.
-            </p>
+            <h2 className="text-2xl font-bold mb-4">Login Successful!</h2>
+            <p className="mb-4">You have successfully logged in.</p>
             <Button
               onClick={closeModal}
               className="bg-blue-950 text-white px-4 py-2 rounded"
