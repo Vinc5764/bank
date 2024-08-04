@@ -55,7 +55,11 @@ export default function UserDash() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          params: {
+            creator: datas._id,
+          },
+        });
         console.log(response.data); // Check structure
         setMembers(response.data);
       } catch (error) {

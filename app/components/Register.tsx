@@ -48,7 +48,7 @@ export default function Register() {
       };
       console.log("Form Data:", mergedData); // Log the form data
       const response = await axios.post(
-        "http://localhost:3000/api/register",
+        "www.johnkpikpi.com/api/register",
         mergedData
       );
 
