@@ -13,6 +13,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import useTokenStore from "@/lib/store";
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
 
 export default function Engage() {
   const [news, setNews] = useState<any>([]);
@@ -25,13 +26,13 @@ export default function Engage() {
     const fetchData = async () => {
       try {
         // Fetch News
-        const newsResponse = await fetch("http://localhost:3000/api/news");
+        const newsResponse = await fetch(`${baseURL}/news`);
         if (!newsResponse.ok) throw new Error("Failed to fetch news");
         const newsData = await newsResponse.json();
         setNews(newsData);
 
         // Fetch Surveys
-        const surveysResponse = await fetch("http://localhost:3000/api/survey");
+        const surveysResponse = await fetch(`${baseURL}/survey`);
         if (!surveysResponse.ok) throw new Error("Failed to fetch surveys");
         const surveysData = await surveysResponse.json();
         setSurveys(surveysData);

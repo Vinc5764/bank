@@ -8,11 +8,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Spinner from "./Spinner";
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
 
 // Function to handle survey creation
-const createSurvey = async (surveyData:any) => {
+const createSurvey = async (surveyData: any) => {
   try {
-    const response = await fetch(`${process.env.URL}/api/survey` || "http://localhost:3000/api/survey", {
+    const response = await fetch(`${baseURL}/survey`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +43,7 @@ export default function CreateSurvey() {
   const router = useRouter();
   const [isloading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (event:any) => {
+  const handleSubmit = async (event: any) => {
     setIsLoading(true);
     event.preventDefault();
     setError(null);
@@ -57,7 +58,7 @@ export default function CreateSurvey() {
     try {
       await createSurvey(surveyData);
       router.push("/dashboard/engage"); // Redirect or show success message
-    } catch (error:any) {
+    } catch (error: any) {
       setError(error.message);
     } finally {
       setIsLoading(false);

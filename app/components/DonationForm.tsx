@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import useTokenStore from "@/lib/store";
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
 
 interface DonationFormData {
   email: string;
@@ -44,10 +45,7 @@ export default function DonationForm() {
         // Merge publicMetadata with form data
       };
       console.log("Form Data:", mergedData); // Log the form data
-      const response = await axios.post(
-        "http://localhost:3000/api/payment",
-        mergedData
-      );
+      const response = await axios.post(`${baseURL}/payment`, mergedData);
 
       console.log(response);
 

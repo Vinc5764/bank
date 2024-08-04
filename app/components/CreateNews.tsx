@@ -8,10 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Spinner from "./Spinner";
 import { uploadFile } from "@/lib/upload";
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
+
 
 const createNews:any = async (newsData:any) => {
   try {
-    const response = await fetch(`${process.env.URL}/api/news` || "http://localhost:3000/api/news", {
+    const response = await fetch(`${baseURL}/news`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
