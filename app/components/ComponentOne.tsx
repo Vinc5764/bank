@@ -50,7 +50,7 @@ const ComponentOne = () => {
           </div>
         </div>
       </div>
-      <div className="md:flex space-y-10 md:space-y-0 text-xl text-blue-950 font-extrabold  gap-5">
+      <div className="md:flex  grid grid-cols-2    md:space-y-0 text-xl text-blue-950 font-extrabold  gap-5">
         <div className=" flex flex-col  gap-7  items-center">
           <div
             style={{ boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)" }}
@@ -64,7 +64,20 @@ const ComponentOne = () => {
             </p>
           </Link>
         </div>
-        <div className=" flex flex-col  gap-7 items-center">
+        <div className=" flex flex-col gap-7  md:ml-[4rem] items-center">
+          <div
+            style={{ boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)" }}
+            className=" w-[100px] h-[100px] inline-flex items-center justify-center justify-center rounded-full bg-[#123f7e]"
+          >
+            <HeartCircle size="32" color="white" />
+          </div>
+          <Link href="/agenda">
+            <p className=" text-center font-extrabold text-blue-950">
+              Agriculture
+            </p>
+          </Link>
+        </div>
+        <div className=" flex flex-col  ml-[11rem]  md:ml-0  gap-7 items-center">
           <div
             style={{ boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)" }}
             className=" w-[100px] h-[100px] inline-flex items-center justify-center rounded-full bg-[#123f7e] "
@@ -72,21 +85,8 @@ const ComponentOne = () => {
             <Activity size="32" color="white" />
           </div>
           <Link href="/agenda">
-            <p className=" text-center font-extrabold  max-w-sm text-blue-950">
+            <p className=" text-center font-extrabold md:max-w-[15rem]  max-w-lg text-blue-950">
               Natural Resource Ownership and Mobilisation
-            </p>
-          </Link>
-        </div>
-        <div className=" flex flex-col  gap-7 items-center">
-          <div
-            style={{ boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)" }}
-            className=" w-[100px] h-[100px] inline-flex items-center justify-center rounded-full bg-[#123f7e]"
-          >
-            <HeartCircle size="32" color="white" />
-          </div>
-          <Link href="/agenda">
-            <p className=" text-center font-extrabold text-blue-950">
-              Agriculture
             </p>
           </Link>
         </div>

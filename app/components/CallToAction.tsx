@@ -55,9 +55,9 @@ const CallToAction = () => {
             <h1 className=" font-bold  text-purple-950 text-5xl">
               MEET Dr. John
             </h1>
-            <h1 className=" font-bold text-purple-950 text-3xl">
+            {/* <h1 className=" font-bold text-purple-950 text-3xl">
               A Message From John
-            </h1>
+            </h1> */}
             <p className=" text-sm">
               Dr. John Kpikpi is a man of integrity, who has served his country
               in several capacities over the years including as a lecturer in
