@@ -54,7 +54,7 @@ export default function DonationForm() {
       if (response.status === 200) {
         // Assuming the response contains a URL to redirect to
         const { url } = response.data;
-        alert("Donation successful");
+        // alert("Donation successful");
         router.push(url);
       } else {
         alert("Failed to process donation");
