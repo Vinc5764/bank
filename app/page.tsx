@@ -28,7 +28,7 @@ export default function Home() {
           {/* Main content */}
 
           <main className="container mx-auto  px-4 flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 max-md:pt-[24rem] lg:pt-[6rem] ">
+            <div className="md:w-1/2 max-md:hidden max-md:pt-[24rem] lg:pt-[6rem] ">
               <h1 className="text-5xl md:text-[4rem] max-md:hidden  font-semibold text-purple-950 font-bold text-navy mb-4">
                 Together, Let's
               </h1>
@@ -58,6 +58,28 @@ export default function Home() {
             {/* Add social media icon components here */}
           </div>
         </main>
+      </div>
+      <div className="md:w-1/2 md:hidden px-4  ">
+        <h1 className="text-5xl md:text-[4rem] max-md:hidden  font-semibold text-purple-950 font-bold text-navy mb-4">
+          Together, Let's
+        </h1>
+        <h1 className="block text-[#A4167A] text-4xl pb-4 font-bold">
+          Reimagine Ghana!
+        </h1>
+        {/* <p className="mb-6 max-md:text-white">Become a part of our team, sign up for updates.</p> */}
+        <Link href={`/register`}>
+          <form className="flex flex-col sm:flex-row gap-4">
+            <button
+              type="submit"
+              style={{
+                boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)",
+              }}
+              className="px-6 py-2 bg-navy text-white rounded  w-1/2 sm:w-1/3 bg-[#A4167A] hover:bg-[#FFCC00] transition"
+            >
+              REGISTER
+            </button>
+          </form>
+        </Link>
       </div>
       <ComponentOne />
       <CallToAction />

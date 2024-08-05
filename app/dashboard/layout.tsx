@@ -1,5 +1,6 @@
 "use client";
-
+import Image from "next/image";
+import logo from "../../public/logo-no-background.png";
 import useTokenStore from "@/lib/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -32,8 +33,13 @@ const layout = ({ children }: any) => {
               className="flex items-center gap-2"
               prefetch={false}
             >
-              <div className="h-6 w-6" />
-              <span className="text-3xl  text-[#A4167A] font-bold">POD</span>
+              <div className="" />
+              {/* <span className="text-3xl  text-[#A4167A] font-bold">POD</span> */}
+              <Image
+                className="h-[4.2rem] w-[4.2rem] object-contain "
+                src={logo}
+                alt=""
+              />
             </Link>
           </div>
           <p

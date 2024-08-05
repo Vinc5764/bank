@@ -10,13 +10,18 @@ import React from "react";
 
 const ComponentOne = () => {
   return (
-    <div className=" px-14 py-20 md:flex items-center gap-5 space-y-10 bg-white ">
+    <div className=" px-5 py-20 flex-col justify-center md:flex items-center gap-5 space-y-10 bg-white ">
       <div className=" flex flex-col gap-6 max-w-md">
-        <h1 className=" font-semibold text-2xl">THE NEW GHANA</h1>
-        <h1 className=" font-bold text-4xl"> 5 Revolutions for Ghana</h1>
+        <h1 className=" font-bold text-purple-950 text-center text-5xl">
+          THE NEW GHANA
+        </h1>
+        <h1 className=" font-bold text-purple-950 text-center text-3xl">
+          {" "}
+          <em className=" text-[#A4167A] text-5xl">5</em> Revolutions for Ghana
+        </h1>
         {/* <p>Proin dictum elementum velit. Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer.</p> */}
 
-        <div className="flex  text-xl gap-9">
+        <div className="flex items-center justify-center mt-5  text-xl gap-9">
           <div className=" flex flex-col  gap-7 items-center">
             <div
               style={{ boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)" }}
@@ -45,7 +50,7 @@ const ComponentOne = () => {
           </div>
         </div>
       </div>
-      <div className="md:flex space-y-10 text-xl text-blue-950 font-extrabold  gap-10">
+      <div className="md:flex space-y-10 md:space-y-0 text-xl text-blue-950 font-extrabold  gap-5">
         <div className=" flex flex-col  gap-7  items-center">
           <div
             style={{ boxShadow: "0px 12px 25px 0px rgba(13, 47, 93, 0.43)" }}
@@ -67,7 +72,7 @@ const ComponentOne = () => {
             <Activity size="32" color="white" />
           </div>
           <Link href="/agenda">
-            <p className=" text-center font-extrabold text-blue-950">
+            <p className=" text-center font-extrabold  max-w-sm text-blue-950">
               Natural Resource Ownership and Mobilisation
             </p>
           </Link>

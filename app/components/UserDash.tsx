@@ -33,6 +33,7 @@ import {
 import useTokenStore from "@/lib/store";
 import axios from "axios";
 import Spinner from "./Spinner";
+import placeholder from "@/public/placeholder.webp";
 
 export default function UserDash() {
   const { datas, userType }: any = useTokenStore();
@@ -157,9 +158,11 @@ export default function UserDash() {
       <header className="flex flex-col items-center gap-[150px] bg-background px-4 py-8 sm:px-6 md:flex-row justify-center md:py-12">
         <div className="flex flex-col items-center gap-4">
           <div
-            className="rounded-full border-2 flex items-center justify-center h-[128px] w-[128px]"
+            className="rounded-full border-2 flex items-center justify-center h-[128px] w-[150px]"
             style={{ aspectRatio: "128/128", objectFit: "cover" }}
-          ></div>
+          >
+            <Image src={placeholder}  alt="placeholder" />
+          </div>
           <div className="grid gap-1 text-center">
             <div className="text-2xl text-[#A4167A] font-bold">
               {datas.name}
