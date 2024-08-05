@@ -161,7 +161,7 @@ export default function UserDash() {
             className="rounded-full border-2 flex items-center justify-center h-[128px] w-[150px]"
             style={{ aspectRatio: "128/128", objectFit: "cover" }}
           >
-            <Image src={placeholder}  alt="placeholder" />
+            <Image src={placeholder} alt="placeholder" />
           </div>
           <div className="grid gap-1 text-center">
             <div className="text-2xl text-[#A4167A] font-bold">
@@ -204,7 +204,7 @@ export default function UserDash() {
                 <DialogHeader>
                   <DialogTitle>Create a new account</DialogTitle>
                   <DialogDescription>
-                    Enter your details below to get started.
+                    Enter your details of the new member to get started.
                   </DialogDescription>
                 </DialogHeader>
                 <form className="grid gap-4 py-4" onSubmit={handleFormSubmit}>
@@ -214,7 +214,7 @@ export default function UserDash() {
                       id="name"
                       value={newMember.name}
                       onChange={handleInputChange}
-                      placeholder="John Doe"
+                      placeholder="Name"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -228,7 +228,7 @@ export default function UserDash() {
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">New Member Password</Label>
                     <Input
                       id="password"
                       type="password"
@@ -242,7 +242,7 @@ export default function UserDash() {
                       id="constituency"
                       value={newMember.constituency}
                       onChange={handleInputChange}
-                      placeholder="Enter your constituency"
+                      placeholder="Enter  constituency"
                     />
                   </div>
                   <div className="grid gap-2">
