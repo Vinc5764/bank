@@ -41,21 +41,15 @@ export const POST = async (req: any) => {
     }
 
     // Send SMS using mNotify
-    const apiKey = "6QTS3io5p3Vqc03BCewDbaIXK"; // Store your mNotify API key in .env file
-    const senderId = "CoreBanc"; // Store your mNotify sender ID in .env file
+    const apiKey = "Cc5wOuXSTjwduc8lCnvqdKgYp"; // Store your mNotify API key in .env file
+    const senderId = "GNTDA"; // Store your mNotify sender ID in .env file
 
-    const smsData = {
-      key: apiKey,
-      sender_id: senderId,
-      to: contactNumber,
-      msg: message,
-    };
+    const mNotifyUrl = `https://apps.mnotify.net/smsapi?key=${apiKey}&to=${contactNumber}&msg=${encodeURIComponent(
+      message
+    )}&sender_id=${senderId}`;
 
     try {
-      const response = await axios.post(
-        "https://api.mnotify.com/api/sms/quick",
-        smsData
-      );
+      const response = await axios.post(mNotifyUrl);
       if (response.data.status === "1000") {
         console.log("SMS sent successfully");
       } else {
