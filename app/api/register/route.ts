@@ -2,7 +2,7 @@ import { connectToDB } from "@/lib/connect";
 import User from "@/app/api/model/user.model";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import nodemailer from "nodemailer";
+import axios from "axios";
 
 export const POST = async (req: any) => {
   try {
@@ -18,7 +18,7 @@ export const POST = async (req: any) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const creatorDetails: any = User.findById(creator);
+    const creatorDetails: any = await User.findById(creator);
     // Create a new user instance
     const newUser = new User({
       email,
@@ -29,43 +29,35 @@ export const POST = async (req: any) => {
       password: hashedPassword,
       role: creator ? "newmember" : "member",
     });
-    const url = "https://www.johnkpikpi.com/sign-in";
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: "kanbanc01@gmail.com",
-        pass: "aftoiqfzhbjwrrzp",
-      },
-    });
 
-    let mailOptions;
+    // SMS message content
+    const url = "https://www.johnkpikpi.com/sign-in";
+    let message;
 
     if (creator) {
-      // Email data when creator is provided
-      mailOptions = {
-        from: "kanbanc01@gmail.com",
-        to: email,
-        subject: "Account Created by Creator",
-        text: `Hello ${name},\n\nYour account has been created by ${creatorDetails.name}. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login\n ${url}.\n\nRegards,\nTeam`,
-      };
+      message = `Hello ${name},\n\nYour account has been created by ${creatorDetails.name}. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login\n ${url}.\n\nRegards,\nTeam`;
     } else {
-      // Email data when creator is not provided
-      mailOptions = {
-        from: "kanbanc01@gmail.com",
-        to: email,
-        subject: "Account Successfully Created",
-        text: `Hello ${name},\n\nYour account has been successfully created. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login.\n\nRegards,\nTeam`,
-      };
+      message = `Hello ${name},\n\nYour account has been successfully created. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login.\n\nRegards,\nTeam`;
     }
 
-    // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error("Error sending email:", error);
+    // Send SMS using mNotify
+    const apiKey = "6QTS3io5p3Vqc03BCewDbaIXK"; // Store your mNotify API key in .env file
+    const senderId = "CoreBanc"; // Store your mNotify sender ID in .env file
+
+    const smsUrl = `https://api.mnotify.com/api/sms/quick?key=${apiKey}&to=${contactNumber}&msg=${encodeURIComponent(
+      message
+    )}&sender_id=${senderId}`;
+
+    try {
+      const response = await axios.get(smsUrl);
+      if (response.data.status === "1000") {
+        console.log("SMS sent successfully");
       } else {
-        console.log("Email sent:", info.response);
+        console.log(`Failed to send SMS: ${response.data.status}`);
       }
-    });
+    } catch (error) {
+      console.error("Error sending SMS:", error);
+    }
 
     // Save the new user to the database
     await newUser.save();
