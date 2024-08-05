@@ -60,6 +60,7 @@ export default function UserDash() {
   const [isLoading, setIsLoading] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [selectedMember, setSelectedMember] = useState<any>(null);
+  const { setUserType }: any = useTokenStore();
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -130,6 +131,7 @@ export default function UserDash() {
 
       if (response.status === 201) {
         alert("Password reset successfully");
+        setUserType("member");
         setIsPasswordResetModalOpen(false);
       }
     } catch (error) {

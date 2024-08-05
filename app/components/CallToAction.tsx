@@ -52,8 +52,8 @@ const CallToAction = () => {
         </div>
         <div className=" mt-5">
           <div className=" flex flex-col gap-6 max-w-md">
-            <h1 className=" font-bold  text-purple-950 text-5xl">
-              MEET Dr. John Kpikpi
+            <h1 className=" font-bold  text-purple-950 text-4xl">
+              Meet Dr. John Kpikpi
             </h1>
             {/* <h1 className=" font-bold text-purple-950 text-3xl">
               A Message From John\
