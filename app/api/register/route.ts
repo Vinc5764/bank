@@ -31,7 +31,7 @@ export const POST = async (req: any) => {
     });
 
     // SMS message content
-    const url = "https://www.johnkpikpi.com/sign-in";
+    const url = "https://www.johnkpikpi.com/";
     let message;
 
     if (creator) {
