@@ -234,7 +234,7 @@ export default function UserDash() {
                       type="password"
                       value={newMember.password}
                       onChange={handleInputChange}
-                      placeholder="New Member Password"
+                      placeholder="Set New Member Password"
                     />
                   </div>
                   <div className="grid gap-2">
