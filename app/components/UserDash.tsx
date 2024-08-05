@@ -214,7 +214,7 @@ export default function UserDash() {
                       id="name"
                       value={newMember.name}
                       onChange={handleInputChange}
-                      placeholder="Name"
+                      placeholder="John Kpipi"
                     />
                   </div>
                   <div className="grid gap-2">
