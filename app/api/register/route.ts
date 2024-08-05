@@ -27,7 +27,7 @@ export const POST = async (req: any) => {
       creator,
       constituency,
       password: hashedPassword,
-      role: "admin",
+      role: creator ? "newmember" : "member",
     });
     const url = "https://www.johnkpikpi.com/sign-in";
     const transporter = nodemailer.createTransport({
