@@ -108,10 +108,10 @@ export default function Login() {
                   type="password"
                   {...register("password", {
                     required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters long",
-                    },
+                    // minLength: {
+                    //   value: 6,
+                    //   message: "Password must be at least 6 characters long",
+                    // },
                   })}
                   placeholder="Your Password"
                 />
