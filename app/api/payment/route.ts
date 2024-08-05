@@ -2,8 +2,10 @@ import { initializePayment } from "@/lib/payment.util";
 import { NextRequest, NextResponse } from "next/server";
 import Donation from "../model/donation.model";
 import User from "../model/user.model";
+import { connectToDB } from "@/lib/connect";
 
 export const POST = async (req: NextRequest) => {
+  await connectToDB();
   try {
     // Parse incoming JSON data from the request body
     const requestData = await req.json();
