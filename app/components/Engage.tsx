@@ -14,12 +14,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import useTokenStore from "@/lib/store";
 const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
-
+// const baseURL = "http://localhost:3000/api";
 export default function Engage() {
   const [news, setNews] = useState<any>([]);
   const [surveys, setSurveys] = useState<any>([]);
   const [error, setError] = useState("");
   const [selectedSurvey, setSelectedSurvey] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
   const { userType } = useTokenStore();
 
   useEffect(() => {
@@ -48,6 +49,14 @@ export default function Engage() {
     setSelectedSurvey(survey);
   };
 
+  const isVideo = (url: string) => {
+    return url?.match(/\.(mp4|webm|ogg)$/i) !== null;
+  };
+
+  const handleVideoClick = (videoUrl: string) => {
+    setSelectedVideo(videoUrl);
+  };
+
   return (
     <div className="w-full min-h-screen bg-background">
       <main className="py-10 px-6">
@@ -71,14 +80,6 @@ export default function Engage() {
           )}
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold">Latest News</h2>
-            {/* <div className="hidden md:flex items-center gap-2">
-              <Button variant="outline" size="icon">
-                <div className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="icon">
-                <div className="h-4 w-4" />
-              </Button>
-            </div> */}
           </div>
           <Carousel className="w-full max-w-6xl">
             <CarouselContent>
@@ -87,15 +88,31 @@ export default function Engage() {
                   <Card className="h-full">
                     <CardContent className="flex h-full flex-col justify-between">
                       <div>
-                        <Image
-                          src={item.imageUrl}
-                          width={400}
-                          height={225}
-                          alt="News Image"
-                          className="aspect-video w-full rounded-t-md object-cover"
-                        />
+                        {isVideo(item.imageUrl) ? (
+                          <div
+                            onClick={() => handleVideoClick(item.imageUrl)}
+                            className="cursor-pointer"
+                          >
+                            <video
+                              className="aspect-video w-full rounded-t-md object-cover"
+                              src={item.imageUrl}
+                              controls
+                            />
+                          </div>
+                        ) : (
+                          <Image
+                            src={item.imageUrl}
+                            width={400}
+                            height={225}
+                            alt="News Image"
+                            className="aspect-video w-full rounded-t-md object-cover"
+                          />
+                        )}
                         <div className="p-4">
-                          <h3 className="text-lg text-purple-950 font-semibold">
+                          <h3
+                            onClick={() => handleVideoClick(item.imageUrl)}
+                            className="text-lg text-purple-950 font-semibold"
+                          >
                             {item.title}
                           </h3>
                           <p className="mt-2 text-muted-foreground">
@@ -113,9 +130,7 @@ export default function Engage() {
                           href="#"
                           className="text-[#A4167A]"
                           prefetch={false}
-                        >
-                          Read more
-                        </Link>
+                        ></Link>
                       </div>
                     </CardContent>
                   </Card>
@@ -188,6 +203,21 @@ export default function Engage() {
             </div>
           </div>
         )}
+        {selectedVideo && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg w-full max-w-4xl">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold">Video</h3>
+                <Button onClick={() => setSelectedVideo(null)}>Close</Button>
+              </div>
+              <video
+                src={selectedVideo}
+                controls
+                className="w-full h-auto rounded"
+              />
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
@@ -199,7 +229,7 @@ function MoveHorizontalIcon(props: any) {
       {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
-      height="24"
+      height={24}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
