@@ -10,7 +10,7 @@ const Header = () => {
         <header className="container mx-auto px-4 py-6 flex justify-between items-center">
           <Link href="/">
             <div className="text-2xl font-bold text-navy">
-              <span className="block max-md:text-white">John Kpikpi</span>
+              <span className="block max-md:text-white">JOHN KPIKPI</span>
               {/* <span className="block">Russell</span> */}
               <span className="text-sm text-[#A4167A]">For President</span>
             </div>
