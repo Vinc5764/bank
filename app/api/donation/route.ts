@@ -10,7 +10,6 @@ export const POST = async (req: any) => {
     const { amount, donorId, userId } = req.body;
 
     await connectToDB();
-
     // Create a new donation
     const donation = new Donation({
       amount,

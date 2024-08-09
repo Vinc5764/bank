@@ -37,12 +37,12 @@ export const POST = async (req: any) => {
     if (creator) {
       message = `Hello ${name},\n\nYour account has been created by ${creatorDetails.name}. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login\n ${url}.\n\nRegards,\nTeam`;
     } else {
-      message = `Hello ${name},\n\nYour account has been successfully created. Your credentials are as follows:\n\nEmail: ${email}\nPassword: ${password}\n\nPlease change your password after your first login.\n\nRegards,\nTeam`;
+      message = `Hello ${name},\n\nYour account has been successfully created.Thank you for joining our mission\n\nRegards,\nTeam`;
     }
 
     // Send SMS using mNotify
-    const apiKey = "Cc5wOuXSTjwduc8lCnvqdKgYp"; // Store your mNotify API key in .env file
-    const senderId = "GNTDA"; // Store your mNotify sender ID in .env file
+    const apiKey = "qGMGejprSNybRF6uFewGQ3Ex7";
+    const senderId = "JK2024";
 
     const mNotifyUrl = `https://apps.mnotify.net/smsapi?key=${apiKey}&to=${contactNumber}&msg=${encodeURIComponent(
       message
