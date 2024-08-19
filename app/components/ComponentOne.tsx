@@ -17,7 +17,7 @@ const ComponentOne = () => {
         </h1>
         <h1 className=" font-bold text-purple-950 text-center text-3xl">
           {" "}
-          <em className=" text-[#A4167A] text-5xl">5</em> Revolutions for Ghana
+          <em className=" text-[#A4167A] text-5xl">5</em> Transformations for Ghana
         </h1>
         {/* <p>Proin dictum elementum velit. Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer.</p> */}
 
