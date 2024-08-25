@@ -39,12 +39,11 @@ const CallToAction = () => {
                   X
                 </button>
                 <iframe
-                  src="https://www.youtube.com/embed/n9BsWhjX1Fw?rel=0&showinfo=0&autohide=2&controls=0&playlist=J2Y_ld0KL-4&enablejsapi=1"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="Embedded video"
-                  className="w-full h-96"
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/zXVvH0BQGts?si=p9xBkkL-kqpYzJAs"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 ></iframe>
               </div>
             </div>
