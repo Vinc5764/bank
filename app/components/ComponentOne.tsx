@@ -29,7 +29,7 @@ const ComponentOne = () => {
             >
               <EmptyWallet size="32" color="white" />
             </div>
-            <Link href="/agenda">
+            <Link href="/integrity">
               <p className=" text-center font-extrabold text-blue-950">
                 Integrity/Ethics
               </p>
@@ -42,7 +42,7 @@ const ComponentOne = () => {
             >
               <MoneySend size="32" color="white" />
             </div>
-            <Link href="/agenda">
+            <Link href="/infrastructure">
               <p className=" text-center font-extrabold text-blue-950">
                 Infrastructure
               </p>
@@ -58,7 +58,7 @@ const ComponentOne = () => {
           >
             <Briefcase size="32" color="white" />
           </div>
-          <Link href="/agenda">
+          <Link href="/industry">
             <p className=" text-center font-extrabold text-blue-950">
               Industry
             </p>
@@ -71,7 +71,7 @@ const ComponentOne = () => {
           >
             <HeartCircle size="32" color="white" />
           </div>
-          <Link href="/agenda">
+          <Link href="/agriculture">
             <p className=" text-center font-extrabold text-blue-950">
               Agriculture
             </p>
@@ -84,7 +84,7 @@ const ComponentOne = () => {
           >
             <Activity size="32" color="white" />
           </div>
-          <Link href="/agenda">
+          <Link href="/naturalresource">
             <p className=" text-center font-extrabold md:max-w-[15rem]  max-w-lg text-blue-950">
               Natural Resource Ownership and Mobilisation
             </p>

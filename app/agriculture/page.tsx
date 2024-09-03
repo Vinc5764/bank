@@ -1,11 +1,12 @@
 import React from 'react'
-import Agenda from '../components/Agenda'
+// import Agenda from '../components/Agenda'
 import Footer from '../components/Footer'
+import AgriculturalTransformation from '../components/Agenda'
 
 const page = () => {
   return (
     <div>
-        <Agenda/>
+        <AgriculturalTransformation/>
         <Footer/>
     </div>
   )
