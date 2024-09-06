@@ -10,7 +10,7 @@ const Footer = () => {
             <h2 className="text-2xl font-bold mb-4">JOIN OUR TEAM</h2>
             <form className="flex">
               <button className="px-4 py-2 text-white font-semibold  border rounded">
-                Register
+                JOIN US
               </button>
             </form>
           </div>

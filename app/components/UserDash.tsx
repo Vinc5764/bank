@@ -199,7 +199,7 @@ export default function UserDash() {
               <DialogTrigger asChild>
                 <Button size="sm" className="bg-purple-950 hover:bg-purple-950">
                   <PlusIcon className="w-4 h-4 mr-2" />
-                  Add Member
+                  Add Friends
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">

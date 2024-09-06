@@ -27,7 +27,7 @@ const Donate = () => {
           </Link>
           <Link href={`/register`}>
           <button className="px-4 py-2 text-white font-semibold border rounded">
-            Register
+            JOIN US
           </button>
           </Link>
         </div>

@@ -45,7 +45,7 @@ export default function Home() {
                     }}
                     className="px-6 py-2 bg-navy text-white rounded  w-1/2 sm:w-1/3 bg-[#A4167A] hover:bg-[#FFCC00] transition"
                   >
-                    REGISTER
+                    JOIN US
                   </button>
                 </form>
               </Link>
@@ -76,7 +76,7 @@ export default function Home() {
               }}
               className="px-6 py-2 bg-navy text-white rounded  w-1/2 sm:w-1/3 bg-[#A4167A] hover:bg-[#FFCC00] transition"
             >
-              REGISTER
+              JOIN US
             </button>
           </form>
         </Link>
