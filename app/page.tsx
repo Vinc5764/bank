@@ -60,7 +60,7 @@ export default function Home() {
         </main>
       </div>
       <div className="md:w-1/2 md:hidden px-4  ">
-        <h1 className="text-5xl md:text-[4rem]   font-semibold text-purple-950 font-bold text-navy mb-4">
+        <h1 className="text-4xl md:text-[4rem]    text-purple-950 font-bold text-navy mb-4">
          Ghana&apos;s wealth for all Ghanaians.
         </h1>
         <h1 className="block text-[#A4167A] text-4xl pb-4 font-bold">
