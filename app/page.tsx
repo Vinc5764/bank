@@ -29,8 +29,8 @@ export default function Home() {
 
           <main className="container mx-auto  px-4 flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 max-md:hidden max-md:pt-[24rem] lg:pt-[6rem] ">
-              <h1 className="text-5xl md:text-[4rem] max-md:hidden  font-semibold text-purple-950 font-bold text-navy mb-4">
-                Together, Let's
+              <h1 className="text-5xl md:text-[4rem] max-md:blo  font-semibold text-purple-950 font-bold text-navy mb-4">
+                Ghana&apos;s wealth for all Ghanaians.
               </h1>
               <h1 className="block text-[#A4167A] text-5xl pb-4 font-bold">
                 Reimagine Ghana!
@@ -60,8 +60,8 @@ export default function Home() {
         </main>
       </div>
       <div className="md:w-1/2 md:hidden px-4  ">
-        <h1 className="text-5xl md:text-[4rem] max-md:hidden  font-semibold text-purple-950 font-bold text-navy mb-4">
-          Together, Let's
+        <h1 className="text-5xl md:text-[4rem]   font-semibold text-purple-950 font-bold text-navy mb-4">
+         Ghana&apos;s wealth for all Ghanaians.
         </h1>
         <h1 className="block text-[#A4167A] text-4xl pb-4 font-bold">
           Reimagine Ghana!
