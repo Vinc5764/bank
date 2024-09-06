@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const PAYSTACK_SECRET_KEY = "sk_test_fcc05416469bb4e211d4f89d6870b5328dc847dc";
+const PAYSTACK_SECRET_KEY = "sk_live_512a229a2addc0fc908de76c760ead1a63c7246d";
 
 export const initializePayment = async (paymentData:any) => {
   const response = await axios.post(

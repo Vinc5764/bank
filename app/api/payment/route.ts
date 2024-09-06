@@ -42,9 +42,9 @@ export const POST = async (req: NextRequest) => {
     });
 
     const user = await User.findById(userId);
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
+    // if (!user) {
+    //   return NextResponse.json({ error: "User not found" }, { status: 404 });
+    // }
 
     user.donations = user.donations + amount; // Increment the donations field
     await user.save();
