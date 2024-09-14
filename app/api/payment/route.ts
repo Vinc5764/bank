@@ -61,25 +61,25 @@ export const POST = async (req: NextRequest) => {
  console.log(donation);
  
     // Find and update the user's donation total
-    const user = await User.findById(userId);
+    // const user = await User.findById(userId);
     // if (!user) {
     //   return NextResponse.json({ message: "User not found" }, { status: 404 });
     // }
 
     // Safely increment the donations field
-    if (user) {
-      user.donations = (user.donations || 0) + amount;
-      await user.save();
+  //   if (user) {
+  //     user.donations = (user.donations || 0) + amount;
+  //     await user.save();
 
-   }
-    console.log(user);
+  //  }
+  //   console.log(user);
 
     // Return the payment URL to the client
     return NextResponse.json({
       message: "Payment initialized successfully",
       url: paymentResponse.data.authorization_url,
       donation,
-      
+
      
     });
   } catch (error) {
