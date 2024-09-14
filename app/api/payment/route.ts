@@ -79,6 +79,7 @@ export const POST = async (req: NextRequest) => {
       message: "Payment initialized successfully",
       url: paymentResponse.data.authorization_url,
       donation,
+      
      
     });
   } catch (error) {
