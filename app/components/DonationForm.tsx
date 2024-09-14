@@ -21,6 +21,7 @@ interface DonationFormData {
   email: string;
   contactNumber: string;
   amount: number;
+  currency: string; // Add currency field
 }
 
 export default function DonationForm() {
@@ -54,7 +55,6 @@ export default function DonationForm() {
       if (response.status === 200) {
         // Assuming the response contains a URL to redirect to
         const { url } = response.data;
-        // alert("Donation successful");
         router.push(url);
       } else {
         alert("Failed to process donation");
@@ -112,6 +112,23 @@ export default function DonationForm() {
                 </p>
               )}
             </div>
+
+            {/* Currency Selection */}
+            <div className="space-y-2">
+              <Label htmlFor="currency">Currency</Label>
+              <select
+                id="currency"
+                {...register("currency", { required: "Currency is required" })}
+                className="px-4 py-2 text-black bg-white rounded border"
+              >
+                <option value="GHS">GHS</option>
+                <option value="USD">USD</option>
+              </select>
+              {errors.currency && (
+                <p className="text-red-500">{errors.currency.message as string}</p>
+              )}
+            </div>
+
             <CardFooter className="flex justify-end gap-2">
               <Button className=" " type="submit" disabled={loading}>
                 {loading ? "Loading..." : "Submit"}

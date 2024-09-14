@@ -13,8 +13,9 @@ export const POST = async (req: any) => {
     // Create a new donation
     const donation = new Donation({
       amount,
-      donor: donorId, // Assuming donorId is passed in the request body
+       // Assuming donorId is passed in the request body
     });
+console.log(donation);
 
     await donation.save();
 
