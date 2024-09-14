@@ -9,24 +9,40 @@ export const POST = async (req: NextRequest) => {
   try {
     // Parse incoming JSON data from the request body
     const requestData = await req.json();
-    const { email, amount, metadata, donorId, userId } = requestData;
+    const { email, amount, currency, metadata, donorId, userId } = requestData;
 
     // Validate required fields
-    if (!email || !amount) {
+    if (!email || !amount ) {
       return NextResponse.json(
         { message: "Missing required fields" },
         { status: 400 }
       );
     }
-    // Initialize payment to include both card and mobile money options
+
+    // Convert amount to smallest unit depending on the currency
+    let convertedAmount;
+    switch (currency.toUpperCase()) {
+      case "GHS": // Ghanaian Cedis
+        convertedAmount = amount * 100; // Convert GHS to pesewas
+        break;
+      case "USD": // US Dollars
+        convertedAmount = amount *16* 100; // Convert USD to cents
+        break;
+      default: // Default for unsupported currencies or NGN (Nigerian Naira)
+        return NextResponse.json(
+          { message: "Unsupported currency" },
+          { status: 400 }
+        );
+    }
+
+    // Initialize payment with currency-specific amount
     const paymentResponse = await initializePayment({
       email: email,
-      amount: amount * 100, // Amount in kobo for Paystack (NGN 50.00)
+      amount: convertedAmount, // Amount in smallest unit for the currency
+      currency: "GHS", // Use the currency passed by the user (GHS, USD, etc.)
       metadata: metadata,
       channels: ["card", "mobile_money"], // Include both card and mobile money channels
     });
-
-    const url = "https://www.johnkpikpi.com/sign-in";
 
     // Check if the payment initialization was successful
     if (!paymentResponse.status) {
@@ -36,19 +52,25 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
+    // Create a donation record
     const donation = new Donation({
       amount,
       donor: donorId, // Assuming donorId is passed in the request body
     });
+    await donation.save(); // Save the donation to the database
 
+    // Find and update the user's donation total
     const user = await User.findById(userId);
     // if (!user) {
-    //   return NextResponse.json({ error: "User not found" }, { status: 404 });
+    //   return NextResponse.json({ message: "User not found" }, { status: 404 });
     // }
 
-    user.donations = user.donations + amount; // Increment the donations field
-    await user.save();
+    // Safely increment the donations field
+    if (user) {
+      user.donations = (user.donations || 0) + amount;
+      await user.save();
 
+   }
     console.log(user);
 
     // Return the payment URL to the client
