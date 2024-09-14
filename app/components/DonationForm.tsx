@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import useTokenStore from "@/lib/store";
-const baseURL = "http://localhost:3001/api"; // Base URL without trailing slash
+const baseURL = "https://www.johnkpikpi.com/api"; // Base URL without trailing slash
 
 interface DonationFormData {
   email: string;
