@@ -58,7 +58,8 @@ export const POST = async (req: NextRequest) => {
       donor: donorId, // Assuming donorId is passed in the request body
     });
     await donation.save(); // Save the donation to the database
-
+ console.log(donation);
+ 
     // Find and update the user's donation total
     const user = await User.findById(userId);
     // if (!user) {
@@ -78,7 +79,7 @@ export const POST = async (req: NextRequest) => {
       message: "Payment initialized successfully",
       url: paymentResponse.data.authorization_url,
       donation,
-      user,
+     
     });
   } catch (error) {
     // Handle errors
